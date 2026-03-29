@@ -43,16 +43,17 @@ pipeline {
             }
         }
         stage('Deploy to EC2') {
-            steps {
-                sh '''
-                ssh ubuntu@$SERVER_IP "
-                docker pull $ECR_REPO:latest
-                docker stop task-api || true
-                docker rm task-api || true
-                docker run -d -p 80:80 --name task-api $ECR_REPO:latest
-                "
-                '''
-            }
-        }
+    steps {
+        sh '''
+        ssh -o StrictHostKeyChecking=no ubuntu@35.154.115.130 "
+        docker pull 304686171763.dkr.ecr.ap-south-1.amazonaws.com/task-manager-api:latest
+        docker stop task-api || true
+        docker rm task-api || true
+        docker run -d -p 80:80 --name task-api 304686171763.dkr.ecr.ap-south-1.amazonaws.com/task-manager-api:latest
+        "
+        '''
     }
+}
+        
+        }
 }
