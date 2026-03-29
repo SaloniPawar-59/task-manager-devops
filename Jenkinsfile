@@ -6,7 +6,7 @@ pipeline {
         stage('Build Application') {
             steps {
                 sh 'dotnet restore'
-                sh 'dotnet build'
+                sh 'dotnet build --no-restore'
             }
         }
 
