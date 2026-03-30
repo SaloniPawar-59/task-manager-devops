@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2') {
+        stage('Deploy to EC2 Server') {
             steps {
                 sh '''
                 ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "
