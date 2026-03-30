@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Building Docker Image') {
             steps {
                 sh 'docker build -t task-manager-api .'
             }
