@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = "ap-south-1"
         ECR_REPO = "304686171763.dkr.ecr.ap-south-1.amazonaws.com/task-manager-api"
-        SERVER_IP = "35.154.115.130"
+        EC2_TAG = "task-api-server"
     }
 
     stages {
@@ -42,18 +42,36 @@ pipeline {
                 sh 'docker push $ECR_REPO:latest'
             }
         }
-        stage('Deploy to EC2') {
-    steps {
-        sh '''
-        ssh -o StrictHostKeyChecking=no ubuntu@35.154.115.130 "
-        docker pull 304686171763.dkr.ecr.ap-south-1.amazonaws.com/task-manager-api:latest
-        docker stop task-api || true
-        docker rm task-api || true
-        docker run -d -p 80:80 --name task-api 304686171763.dkr.ecr.ap-south-1.amazonaws.com/task-manager-api:latest
-        "
-        '''
-    }
-}
-        
+
+        stage('Get EC2 Public IP') {
+            steps {
+                script {
+                    env.SERVER_IP = sh(
+                        script: """
+                        aws ec2 describe-instances \
+                        --filters "Name=tag:Name,Values=$EC2_TAG" \
+                        "Name=instance-state-name,Values=running" \
+                        --query "Reservations[*].Instances[*].PublicIpAddress" \
+                        --output text
+                        """,
+                        returnStdout: true
+                    ).trim()
+                }
+            }
         }
+
+        stage('Deploy to EC2') {
+            steps {
+                sh '''
+                ssh -o StrictHostKeyChecking=no ubuntu@$SERVER_IP "
+                docker pull $ECR_REPO:latest
+                docker stop task-api || true
+                docker rm task-api || true
+                docker run -d -p 80:80 --name task-api $ECR_REPO:latest
+                "
+                '''
+            }
+        }
+
+    }
 }
