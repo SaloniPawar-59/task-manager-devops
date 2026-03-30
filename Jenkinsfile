@@ -68,7 +68,7 @@ pipeline {
                 docker pull $ECR_REPO:latest
                 docker stop task-api || true
                 docker rm task-api || true
-                docker run -d -p 80:80 --name task-api $ECR_REPO:latest
+                docker run -d  --restart always -p 5000:80 --name task-api $ECR_REPO:latest
                 "
                 '''
             }
