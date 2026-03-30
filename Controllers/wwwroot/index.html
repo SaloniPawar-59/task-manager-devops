@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager API</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #38bdf8;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #38bdf8;
+            color: black;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Task Manager API</h1>
+    <p>Status: Running</p>
+
+    <button onclick="checkHealth()">Check API Health</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+async function checkHealth() {
+    const response = await fetch('/health');
+    const text = await response.text();
+    document.getElementById("result").innerText = text;
+}
+</script>
+
+</body>
+</html>

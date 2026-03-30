@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DevOpsProjects\\task-manager-api\\task-manager-api.csproj": {}
+    "C:\\DevOpsProjects\\task-manager-api.csproj": {}
   },
   "projects": {
-    "C:\\DevOpsProjects\\task-manager-api\\task-manager-api.csproj": {
+    "C:\\DevOpsProjects\\task-manager-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DevOpsProjects\\task-manager-api\\task-manager-api.csproj",
+        "projectUniqueName": "C:\\DevOpsProjects\\task-manager-api.csproj",
         "projectName": "task-manager-api",
-        "projectPath": "C:\\DevOpsProjects\\task-manager-api\\task-manager-api.csproj",
+        "projectPath": "C:\\DevOpsProjects\\task-manager-api.csproj",
         "packagesPath": "C:\\Users\\Saloni Pawar\\.nuget\\packages\\",
-        "outputPath": "C:\\DevOpsProjects\\task-manager-api\\obj\\",
+        "outputPath": "C:\\DevOpsProjects\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Saloni Pawar\\AppData\\Roaming\\NuGet\\NuGet.Config"
