@@ -49,6 +49,7 @@ pipeline {
                     env.SERVER_IP = sh(
                         script: """
                         aws ec2 describe-instances \
+                        --region ap-south-1 \
                         --filters "Name=tag:Name,Values=$EC2_TAG" \
                         "Name=instance-state-name,Values=running" \
                         --query "Reservations[*].Instances[*].PublicIpAddress" \
